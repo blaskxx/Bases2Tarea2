@@ -4,14 +4,15 @@ import edu.una.adb.entities.Init_File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
+import org.controlsfx.dialog.Dialogs;
+
 
 import java.io.*;
 import java.net.URL;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     Map<String, String> map;
+
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
     @FXML    private Button BT_open;
@@ -27,6 +29,8 @@ public class Controller implements Initializable {
     @FXML    private TextField TF_opc;
     @FXML    private TextField TF_val;
     @FXML    private TextField TF_path;
+
+
 
     private  FileChooser fileChooser = new FileChooser();
     private File openedFile;
@@ -46,21 +50,52 @@ public class Controller implements Initializable {
             openedFile = fileChooser.showOpenDialog(BT_open.getScene().getWindow());
             if(openedFile != null){
                 isFileOpen = true;
-                //AQUI va el readfile
+
                 if(readFile(openedFile)){
                     Inicialize_Table(map);
                 }
                 TF_path.setText(openedFile.getAbsolutePath());
             }
         });
-        BT_new.setOnMousePressed(e->{
-            fileChooser.setTitle("Guardar Archivo...");
-            openedFile = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
-            if(openedFile != null){
-                isFileOpen = true;
-                TF_path.setText(openedFile.getAbsolutePath());
+
+
+
+    }
+
+    @FXML
+    private void handleAbout() {
+        Dialogs.create()
+                .title("AddressApp")
+                .masthead("About")
+                .message("Author: José Pablo Madrigal \n Johan Salas \n Kevin Abarca.")
+                .showInformation();
+    }
+
+    @FXML
+    private void handleSaveAs() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Pone Extención
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "Ora files (*.ora)", "*.ora");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Muestra la caja de dialogo
+        File file = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
+
+        if (file != null) {
+            // Valida la extensión
+            if (!file.getPath().endsWith(".ora")) {
+                file = new File(file.getPath() + ".ora");
             }
-        });
+            //Metodo de salvar
+        }
+
+    }
+
+    @FXML
+    private void handleExit() {
+        System.exit(0);
     }
 
     boolean readFile(File file){
