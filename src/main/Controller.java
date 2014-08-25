@@ -81,6 +81,14 @@ public class Controller implements Initializable {
                 TF_path.setText(openedFile.getAbsolutePath());
             }
         });
+        BT_new.setOnMousePressed(e->{
+            fileChooser.setTitle("Guardar Archivo...");
+            openedFile = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
+            if(openedFile != null){
+                isFileOpen = true;
+                TF_path.setText(openedFile.getAbsolutePath());
+            }
+        });
     }
 
 }
