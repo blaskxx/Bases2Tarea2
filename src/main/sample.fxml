@@ -50,22 +50,24 @@
                         </TitledPane>
                       <TitledPane animated="false" text="Configurar Parametros">
                            <content>
-                              <SplitPane dividerPositions="0.7859848484848485" orientation="VERTICAL" prefHeight="498.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane orientation="VERTICAL" prefHeight="498.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                       <children>
-                                          <TableView fx:id="t_file_props" editable="true" layoutY="-7.0" prefHeight="343.0" prefWidth="628.0" AnchorPane.bottomAnchor="-121.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="628.0">
-                                       <children>
-                                          <TextField fx:id="TF_opc" layoutX="149.0" layoutY="16.0" />
-                                          <TextField fx:id="TF_val" layoutX="366.0" layoutY="16.0" />
-                                          <Label layoutX="85.0" layoutY="21.0" text="Opción:" />
-                                          <Label layoutX="328.0" layoutY="20.0" text="Valor:" />
-                                          <Button fx:id="BT_add" layoutX="552.0" layoutY="16.0" mnemonicParsing="false" text="Agregar" />
-                                       </children>
-                                    </AnchorPane>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                       <center>
+                                          <TableView fx:id="t_file_props" editable="true" prefHeight="343.0" prefWidth="628.0" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <bottom>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="628.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <TextField fx:id="TF_opc" layoutX="149.0" layoutY="16.0" />
+                                                <TextField fx:id="TF_val" layoutX="366.0" layoutY="16.0" />
+                                                <Label layoutX="85.0" layoutY="21.0" text="Opción:" />
+                                                <Label layoutX="328.0" layoutY="20.0" text="Valor:" />
+                                                <Button fx:id="BT_add" layoutX="552.0" layoutY="16.0" mnemonicParsing="false" text="Agregar" />
+                                             </children>
+                                          </AnchorPane>
+                                       </bottom>
+                                    </BorderPane>
                                 </items>
                               </SplitPane>
                            </content>
