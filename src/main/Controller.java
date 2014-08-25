@@ -11,7 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -20,13 +22,22 @@ public class Controller implements Initializable {
     Map<String, String> map;
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
+    @FXML    private Button BT_open;
+    @FXML    private Button BT_new;
     @FXML    private TextField TF_opc;
     @FXML    private TextField TF_val;
+    @FXML    private TextField TF_path;
+
+    private  FileChooser fileChooser = new FileChooser();
+    private File openedFile;
+    private boolean isFileOpen = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Init_File ini = new Init_File();
         map = ini.getData();
+
+
 
         //**************************************************************************************************//
         //Table
@@ -62,7 +73,14 @@ public class Controller implements Initializable {
             items.clear();
             items.addAll(map.entrySet());
         });
-
+        BT_open.setOnMousePressed(e->{
+            fileChooser.setTitle("Open Config File");
+            openedFile = fileChooser.showOpenDialog(BT_open.getScene().getWindow());
+            if(openedFile != null){
+                isFileOpen = true;
+                TF_path.setText(openedFile.getAbsolutePath());
+            }
+        });
     }
 
 }
