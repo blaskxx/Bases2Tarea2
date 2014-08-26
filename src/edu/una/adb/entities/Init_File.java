@@ -13,9 +13,7 @@ import java.util.Observable;
  */
 public class Init_File{
     private final Map<String,String> data;
-   // public Init_File(boolean n){
-     //   data = new HashMap<String, String>();
-    //}
+
     public Init_File() {
         data = new HashMap<String, String>();
         data.put("db_name", "STBC");
