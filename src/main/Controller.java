@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
+import org.controlsfx.dialog.Dialogs;
 
 import java.io.*;
 import java.net.URL;
@@ -122,6 +123,37 @@ public class Controller implements Initializable {
         this.t_file_props.getItems().clear();
         this.t_file_props.setItems(items);
         this.t_file_props.getSortOrder().addAll(t_file_props.getColumns().get(0));
+    }
+
+
+    @FXML
+    private void handleAbout() {
+        Dialogs.create()
+                .title("AddressApp")
+                .masthead("About")
+                .message("Author: José Pablo Madrigal \n Johan Salas \n Kevin Abarca.")
+                .showInformation();
+    }
+    @FXML
+    private void handleSaveAs() {
+        FileChooser fileChooser = new FileChooser();
+    // Pone Extención
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "Ora files (*.ora)", "*.ora");
+        fileChooser.getExtensionFilters().add(extFilter);
+    // Muestra la caja de dialogo
+        File file = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
+        if (file != null) {
+    // Valida la extensión
+            if (!file.getPath().endsWith(".ora")) {
+                file = new File(file.getPath() + ".ora");
+            }
+            ini.save(file);
+        }
+    }
+    @FXML
+    private void handleExit() {
+        System.exit(0);
     }
 }
 
