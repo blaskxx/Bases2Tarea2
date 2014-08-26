@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -14,7 +16,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="Item_Save_Menu" mnemonicParsing="false" onAction="#handleSaveAs" text="Save As" />
+              <MenuItem fx:id="Item_Save_Menu" mnemonicParsing="false" onAction="#handleSaveAs" text="Save As INIT FILE" />
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Close" />
             </items>
           </Menu>
@@ -83,37 +85,23 @@
           </Tab>
           <Tab text="TableSpace Creator">
                <content>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <GridPane GridPane.columnIndex="1">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <CheckBox mnemonicParsing="false" text="System" GridPane.halignment="CENTER" />
-                              <CheckBox mnemonicParsing="false" text="Sysaux" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <CheckBox mnemonicParsing="false" text="Temp" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <CheckBox mnemonicParsing="false" text="Undo" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                           </children>
-                        </GridPane>
-                        <Label text="Tipo:" GridPane.halignment="CENTER" />
+                        <Label layoutX="14.0" layoutY="239.0" text="Example: CREATE TABLESPACE &lt;nombre&gt; DATAFILE &lt;nombredatafile.dbf&gt;" />
+                        <Label layoutX="332.0" layoutY="131.0" text="DataFile" />
+                        <TextField layoutX="403.0" layoutY="126.0" />
+                        <Label layoutX="14.0" layoutY="269.0" text="SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE 100M ;" />
+                        <Label layoutX="21.0" layoutY="131.0" text="Create TableSpace" />
+                        <Label layoutX="21.0" layoutY="171.0" text="SIZE" />
+                        <TextField layoutX="82.0" layoutY="166.0" prefHeight="25.0" prefWidth="65.0" />
+                        <ComboBox fx:id="combobox" layoutX="153.0" layoutY="126.0" prefHeight="25.0" prefWidth="170.0" promptText="Select TableSpace" />
+                        <Label layoutX="153.0" layoutY="171.0" prefHeight="15.0" prefWidth="174.0" text="M AUTOEXTEND ON NEXT" />
+                        <TextField layoutX="327.0" layoutY="166.0" prefHeight="25.0" prefWidth="28.0" />
+                        <Label layoutX="364.0" layoutY="171.0" prefHeight="15.0" prefWidth="78.0" text="M MAXSIZE" />
+                        <Label layoutX="531.0" layoutY="171.0" text="M" />
+                        <TextField layoutX="442.0" layoutY="166.0" prefHeight="25.0" prefWidth="84.0" />
                      </children>
-                  </GridPane>
+                  </Pane>
                </content>
           </Tab>
         </tabs>

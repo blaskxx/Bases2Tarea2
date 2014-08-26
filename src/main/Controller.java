@@ -4,12 +4,10 @@ import edu.una.adb.entities.Init_File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import org.controlsfx.dialog.Dialogs;
@@ -17,11 +15,12 @@ import org.controlsfx.dialog.Dialogs;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import static bases_2.Tarea_2.util.File_Utils.readFile;
 
 public class Controller implements Initializable {
+
     //private static Map<String, String> map = new HashMap<>();
     private static Init_File ini;
 
@@ -33,13 +32,30 @@ public class Controller implements Initializable {
     @FXML    private TextField TF_opc;
     @FXML    private TextField TF_val;
     @FXML    private TextField TF_path;
-
+    @FXML   private ComboBox<String> combobox;
+    @FXML   private TextField DF_Text;
+    @FXML   private TextField DFSize_Text;
+    @FXML   private TextField DFAutoExtend_Text;
+    @FXML   private TextField DFMAXSIZE_Text;
+    ObservableList<String>  l= FXCollections.observableArrayList(
+            "SYSTEM","SYSAUX","TEMP","UNDO"
+    );
     private  FileChooser fileChooser = new FileChooser();
     private File openedFile;
     private boolean isFileOpen = false;
 
+    public static ObservableList<String> getList(){
+        ObservableList<String> list= FXCollections.observableArrayList();
+        list.add("SYSTEM");
+        list.add("SYSAUX");
+        list.add("TEMP");
+        list.add("UNDO");
+        return list;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        combobox.setItems(l);
 
         //Tabla
         Inicialize_Table();
@@ -64,10 +80,7 @@ public class Controller implements Initializable {
                 this.restart_table_data();
             }
         });
-       // BT_saveIni.setOnMousePressed(e->{
-                   // if(isFileOpen) ini.save(openedFile);
-         //       }
-       // );
+
     }
 
     public void Inicialize_Table(){
@@ -117,6 +130,7 @@ public class Controller implements Initializable {
                 }
         );
 
+
     }
     private void restart_table_data(){
         ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(ini.getData().entrySet());
@@ -156,5 +170,11 @@ public class Controller implements Initializable {
     private void handleExit() {
         System.exit(0);
     }
+
+
+
+
+
+
 }
 
