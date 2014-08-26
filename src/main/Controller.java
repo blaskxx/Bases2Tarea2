@@ -1,6 +1,7 @@
 package main;
 
 import edu.una.adb.entities.Init_File;
+import edu.una.adb.entities.SQL_File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -171,7 +172,39 @@ public class Controller implements Initializable {
         System.exit(0);
     }
 
+    SQL_File sql;
+    @FXML
+    private void handleSaveSQL(){
 
+        sql= new SQL_File();
+        sql.generarFormato(combobox.getValue(),DF_Text.getText(),DFSize_Text.getText(),DFAutoExtend_Text.getText(),
+                DFMAXSIZE_Text.getText());
+
+
+
+        FileChooser fileChooser = new FileChooser();
+        // Pone Extención
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "SQL files (*.sql)", "*.sql");
+        fileChooser.getExtensionFilters().add(extFilter);
+        // Muestra la caja de dialogo
+        File file = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
+        if (file != null) {
+            // Valida la extensión
+            if (!file.getPath().endsWith(".sql")) {
+                file = new File(file.getPath() + ".sql");
+            }
+            if(sql.getFormato()!=null)
+                sql.save(file);
+            else{
+                Dialogs.create()
+                        .title("Alert")
+                        .masthead("Alert")
+                        .message("No se ha generado ningún archivo el cual guardar.")
+                        .showWarning();
+            }
+        }
+    }
 
 
 
