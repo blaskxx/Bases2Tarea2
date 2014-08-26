@@ -15,15 +15,20 @@ import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static bases_2.Tarea_2.util.File_Utils.readFile;
 
 public class Controller implements Initializable {
-    Map<String, String> map;
+    //private static Map<String, String> map = new HashMap<>();
+    private static Init_File ini;
+
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
     @FXML    private Button BT_open;
     @FXML    private Button BT_new;
+    @FXML    private Button BT_saveIni;
     @FXML    private TextField TF_opc;
     @FXML    private TextField TF_val;
     @FXML    private TextField TF_path;
@@ -34,23 +39,18 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Init_File ini = new Init_File();
-        map = ini.getData();
+
         //Tabla
-        Inicialize_Table(map);
-
-
+        Inicialize_Table();
 
         BT_open.setOnMousePressed(e->{
             fileChooser.setTitle("Open Config File");
             openedFile = fileChooser.showOpenDialog(BT_open.getScene().getWindow());
             if(openedFile != null){
                 isFileOpen = true;
-                //AQUI va el readfile
-                if(readFile(openedFile)){
-                    Inicialize_Table(map);
-                }
+                ini = new Init_File(readFile(openedFile));
                 TF_path.setText(openedFile.getAbsolutePath());
+                this.restart_table_data();
             }
         });
         BT_new.setOnMousePressed(e->{
@@ -59,54 +59,18 @@ public class Controller implements Initializable {
             if(openedFile != null){
                 isFileOpen = true;
                 TF_path.setText(openedFile.getAbsolutePath());
+                ini=new Init_File();
+                this.restart_table_data();
             }
         });
+       // BT_saveIni.setOnMousePressed(e->{
+                   // if(isFileOpen) ini.save(openedFile);
+         //       }
+       // );
     }
 
-    boolean readFile(File file){
-        try {
-            BufferedReader buffer = new BufferedReader(new FileReader(file));
+    public void Inicialize_Table(){
 
-            String text;
-
-            while((text=buffer.readLine()) != null){
-
-                if(!text.startsWith("#")&&!text.isEmpty()){
-
-                    text = text.replaceAll("\\s+","");
-                    String[] palabras=text.split("=");
-                    System.out.println(palabras[0]);
-                    if(map.containsKey(palabras[0])){
-                        if(palabras[1].contains("#")){
-                            String[] aux=palabras[1].split("#");
-
-                            palabras[1]=aux[0];
-                        }
-                        map.replace(palabras[0],palabras[1]);
-
-                    }else{
-
-                        if(palabras[1].contains("#")){
-                            String[] aux=palabras[1].split("#");
-
-                            palabras[1]=aux[0];
-                        }
-                        map.put(palabras[0],palabras[1]);
-
-                    }
-
-                }
-            }
-            return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public void Inicialize_Table(Map<String, String> mapa){
         //**************************************************************************************************//
         //Table
         // use fully detailed type for Map.Entry<String, String>
@@ -117,32 +81,47 @@ public class Controller implements Initializable {
         TableColumn<Map.Entry<String, String>, String> column2 = new TableColumn<>("Valor");
         column2.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue()));
         column2.setCellFactory(TextFieldTableCell.forTableColumn());
+
         column2.setOnEditCommit(e -> {
             Map.Entry<String, String> entry = e.getTableView().getItems().get(e.getTablePosition().getRow());
-            mapa.put(entry.getKey(), e.getNewValue());
+            ini.getData().put(entry.getKey(), e.getNewValue());
         });
 
-        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(mapa.entrySet());
-
-
-        column2.setEditable(true);
         column1.setEditable(false);
+        column2.setEditable(true);
+
+        column1.prefWidthProperty().bind(t_file_props.prefWidthProperty().multiply(0.4));
+        column2.prefWidthProperty().bind(t_file_props.prefWidthProperty().multiply(0.4));
+
+        column1.setSortType(TableColumn.SortType.ASCENDING);
+
         t_file_props.setEditable(true);
 
-        t_file_props.setItems(items);
-        t_file_props.getColumns().setAll(column1, column2);
+        t_file_props.getColumns().addAll(column1,column2);
+
 
         /***                    BUTTONS                     ***/
         /*--------------------------------------------------**/
         BT_add.setOnMousePressed(e -> {
             if (TF_opc.getText() == null || TF_val.getText() == null) return;
             if (TF_opc.getText().trim().equals("") || TF_val.getText().trim().equals("")) return;
-            map.put(TF_opc.getText(), TF_val.getText());
-            items.clear();
-            items.addAll(mapa.entrySet());
+            ini.getData().put(TF_opc.getText(), TF_val.getText());
+            t_file_props.getItems().add(new AbstractMap.SimpleEntry<String, String>(TF_opc.getText(), TF_val.getText()));
+            TF_opc.clear();TF_val.clear();
+            //for(Map.Entry me: ini.getData().entrySet()) System.out.println(me.getKey()+" -> "+ me.getValue());
         });
+        BT_saveIni.setOnMousePressed(e->{
+                    if(isFileOpen)
+                        ini.save(openedFile);
+                }
+        );
 
     }
-
+    private void restart_table_data(){
+        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(ini.getData().entrySet());
+        this.t_file_props.getItems().clear();
+        this.t_file_props.setItems(items);
+        this.t_file_props.getSortOrder().addAll(t_file_props.getColumns().get(0));
+    }
 }
 
