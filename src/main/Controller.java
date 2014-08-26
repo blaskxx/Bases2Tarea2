@@ -133,6 +133,7 @@ public class Controller implements Initializable {
                 .masthead("About")
                 .message("Author: José Pablo Madrigal \n Johan Salas \n Kevin Abarca.")
                 .showInformation();
+
     }
     @FXML
     private void handleSaveAs() {
