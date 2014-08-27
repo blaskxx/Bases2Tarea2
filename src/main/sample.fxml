@@ -35,7 +35,7 @@
                <content>
                   <Accordion>
                     <panes>
-                      <TitledPane animated="false" prefHeight="264.0" prefWidth="750.0" text="Selecionar Archivo">
+                      <TitledPane prefHeight="264.0" prefWidth="750.0" text="Selecionar Archivo">
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
@@ -46,7 +46,7 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                      <TitledPane animated="false" text="Configurar Parametros">
+                      <TitledPane text="Configurar Parametros">
                            <content>
                               <SplitPane orientation="VERTICAL" prefHeight="498.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
