@@ -149,6 +149,7 @@ public class Controller implements Initializable {
             if (!file.getPath().endsWith(".ora")) {
                 file = new File(file.getPath() + ".ora");
             }
+
             ini.save(file);
         }
     }
