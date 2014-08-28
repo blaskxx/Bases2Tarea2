@@ -24,6 +24,7 @@ public class Controller implements Initializable {
 
     //private static Map<String, String> map = new HashMap<>();
     private static Init_File ini;
+    private static File sqlFile;
 
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
@@ -56,6 +57,10 @@ public class Controller implements Initializable {
     @FXML   private TextField DFAutoExtend_Text;
     @FXML   private TextField DFMAXSIZE_Text;
 
+    private  FileChooser fileChooser = new FileChooser();
+    private File openedFile;
+    private boolean isFileOpen = false;
+
 
 
     private boolean validateQuerys(String df_text,String df_sizeText,String dfautoextend_text,String dfmaxsize_text){
@@ -64,12 +69,6 @@ public class Controller implements Initializable {
             return false;
         else return true;
     }
-
-    private  FileChooser fileChooser = new FileChooser();
-    private File openedFile;
-    private boolean isFileOpen = false;
-
-
 
     public static ObservableList<String> getList(){
         ObservableList<String> list= FXCollections.observableArrayList();
@@ -93,6 +92,7 @@ public class Controller implements Initializable {
             if(openedFile != null){
                 isFileOpen = true;
                 ini = new Init_File(readFile(openedFile));
+                ini.setPath(openedFile.getAbsolutePath());
                 TF_path.setText(openedFile.getAbsolutePath());
                 this.restart_table_data();
             }
@@ -104,6 +104,7 @@ public class Controller implements Initializable {
                 isFileOpen = true;
                 TF_path.setText(openedFile.getAbsolutePath());
                 ini=new Init_File();
+                ini.setPath(openedFile.getAbsolutePath());
                 this.restart_table_data();
             }
         });
@@ -226,14 +227,14 @@ public class Controller implements Initializable {
                 "SQL files (*.sql)", "*.sql");
         fileChooser.getExtensionFilters().add(extFilter);
         // Muestra la caja de dialogo
-        File file = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
-        if (file != null) {
+        sqlFile = fileChooser.showSaveDialog(BT_open.getScene().getWindow());
+        if (sqlFile != null) {
             // Valida la extensión
-            if (!file.getPath().endsWith(".sql")) {
-                file = new File(file.getPath() + ".sql");
+            if (!sqlFile.getPath().endsWith(".sql")) {
+                sqlFile = new File(sqlFile.getPath() + ".sql");
             }
             if(sql.getFormato()!=null)
-                sql.save(file);
+                sql.save(sqlFile);
             else{
                 Dialogs.create()
                         .title("Alert")

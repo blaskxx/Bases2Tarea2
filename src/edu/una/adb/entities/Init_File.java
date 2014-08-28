@@ -13,6 +13,7 @@ import java.util.Observable;
  */
 public class Init_File{
     private final Map<String,String> data;
+    private String path;
 
     public Init_File() {
         data = new HashMap<String, String>();
@@ -84,5 +85,13 @@ public class Init_File{
             e.printStackTrace();
         }
 
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

@@ -11,9 +11,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane prefHeight="584.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
+<BorderPane prefHeight="585.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controller">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="25.0" prefWidth="621.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -138,6 +138,63 @@
                   </Pane>
                </content>
           </Tab>
+            <Tab text="Creation">
+               <content>
+                  <GridPane prefHeight="89.0" prefWidth="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="339.0" minHeight="10.0" prefHeight="159.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="309.0" minHeight="10.0" prefHeight="266.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TitledPane collapsible="false" prefHeight="409.0" prefWidth="785.0" text="Catalagos" GridPane.rowIndex="1">
+                           <content>
+                              <FlowPane alignment="CENTER" prefHeight="148.0" prefWidth="721.0">
+                                 <children>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                       <children>
+                                          <Label layoutX="36.0" layoutY="68.0" text="CATPROC" />
+                                          <TextField editable="false" layoutX="105.0" layoutY="64.0" prefHeight="25.0" prefWidth="499.0" promptText="PATH" />
+                                          <Button layoutX="623.0" layoutY="64.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="buttonFind" stylesheets="@../style.css" />
+                                          <Label layoutX="36.0" layoutY="18.0" text="CATALOG" />
+                                          <TextField editable="false" layoutX="104.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="502.0" promptText="PATH" />
+                                          <Button layoutX="626.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="buttonFind" stylesheets="@../style.css" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </FlowPane>
+                           </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" prefHeight="193.0" prefWidth="785.0" text="Credenciales" textAlignment="CENTER">
+                           <content>
+                              <FlowPane alignment="CENTER" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="783.0">
+                                 <children>
+                                    <Label text="System Password" />
+                                    <PasswordField prefHeight="25.0" prefWidth="241.0" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </FlowPane>
+                           </content>
+                        </TitledPane>
+                        <TitledPane collapsible="false" prefHeight="277.0" prefWidth="785.0" text="Ejecutar" GridPane.rowIndex="2">
+                           <content>
+                              <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" hgap="70.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Generar" />
+                                    <Button mnemonicParsing="false" text="Generar y Ejecutar" />
+                                 </children>
+                              </FlowPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>
