@@ -1,6 +1,7 @@
 package main;
 
 import edu.una.adb.entities.Init_File;
+import edu.una.adb.entities.LogGroup;
 import edu.una.adb.entities.SQL_File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -28,6 +29,8 @@ public class Controller implements Initializable {
     private static File CATALOG;
     private static File CATPROC;
     private static File build;
+
+    final public LogGroup logGroup = new LogGroup();
 
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
