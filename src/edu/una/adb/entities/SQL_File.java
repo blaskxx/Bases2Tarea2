@@ -135,7 +135,7 @@ public class SQL_File {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(f));
-            writer.write("#Archivo Creado Con la Herramienta Desarrollada como tare2 DABD UNA 2014");writer.newLine();
+            writer.write("--Archivo Creado Con la Herramienta Desarrollada como tare2 DABD UNA 2014");writer.newLine();
 
                 writer.write(formato);
                 writer.newLine();

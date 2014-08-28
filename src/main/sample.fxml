@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
@@ -138,6 +139,25 @@
                   </Pane>
                </content>
           </Tab>
+            <Tab text="Logs">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="531.0" prefWidth="785.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ChoiceBox layoutX="584.0" layoutY="83.0" prefHeight="25.0" prefWidth="187.0" />
+                              <Label layoutX="35.0" layoutY="32.0" text="Agregar Grupo" />
+                              <Button layoutX="126.0" layoutY="28.0" mnemonicParsing="false" text="+" />
+                              <Line endX="1000000.0" layoutX="193.0" layoutY="68.0" startX="-10000.0" />
+                              <ListView layoutX="15.0" layoutY="138.0" prefHeight="243.0" prefWidth="754.0" />
+                              <TextField layoutX="392.0" layoutY="424.0" prefHeight="25.0" prefWidth="199.0" />
+                              <Button layoutX="644.0" layoutY="424.0" mnemonicParsing="false" text="Agregar" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             <Tab text="Creation">
                <content>
                   <GridPane prefHeight="89.0" prefWidth="0.0">

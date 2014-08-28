@@ -25,6 +25,9 @@ public class Controller implements Initializable {
     //private static Map<String, String> map = new HashMap<>();
     private static Init_File ini;
     private static File sqlFile;
+    private static File CATALOG;
+    private static File CATPROC;
+    private static File build;
 
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
