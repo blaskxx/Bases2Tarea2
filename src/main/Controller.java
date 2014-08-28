@@ -1,6 +1,7 @@
 package main;
 
 import edu.una.adb.entities.Init_File;
+import edu.una.adb.entities.LGroups;
 import edu.una.adb.entities.LogGroup;
 import edu.una.adb.entities.SQL_File;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,7 +31,9 @@ public class Controller implements Initializable {
     private static File CATPROC;
     private static File build;
 
-    final public LogGroup logGroup = new LogGroup();
+    final public LGroups logGroup = new LGroups();
+
+    private ObservableList ComboBoxList = FXCollections.observableList(logGroup.getGroups());
 
     @FXML    private TableView t_file_props;
     @FXML    private Button BT_add;
@@ -251,6 +254,9 @@ public class Controller implements Initializable {
         }
     }
 
+    @FXML private void HandeAddGroup(){
+        this.logGroup.add(new LogGroup());
+    }
 
 
 
