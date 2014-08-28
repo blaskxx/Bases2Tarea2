@@ -33,17 +33,43 @@ public class Controller implements Initializable {
     @FXML    private TextField TF_opc;
     @FXML    private TextField TF_val;
     @FXML    private TextField TF_path;
-    @FXML   private ComboBox<String> combobox;
+
+    @FXML   private TextField DF_Text1;
+    @FXML   private TextField DFSize_Text1;
+    @FXML   private TextField DFAutoExtend_Text1;
+    @FXML   private TextField DFMAXSIZE_Text1;
+
+    @FXML   private TextField DF_Text2;
+    @FXML   private TextField DFSize_Text2;
+    @FXML   private TextField DFAutoExtend_Text2;
+    @FXML   private TextField DFMAXSIZE_Text2;
+
+
+    @FXML   private TextField DF_Text3;
+    @FXML   private TextField DFSize_Text3;
+    @FXML   private TextField DFAutoExtend_Text3;
+    @FXML   private TextField DFMAXSIZE_Text3;
+
+
     @FXML   private TextField DF_Text;
     @FXML   private TextField DFSize_Text;
     @FXML   private TextField DFAutoExtend_Text;
     @FXML   private TextField DFMAXSIZE_Text;
-    ObservableList<String>  l= FXCollections.observableArrayList(
-            "SYSTEM","SYSAUX","TEMP","UNDO"
-    );
+
+
+
+    private boolean validateQuerys(String df_text,String df_sizeText,String dfautoextend_text,String dfmaxsize_text){
+        if((df_text.isEmpty()||df_text==null) && (df_sizeText==null||df_sizeText.isEmpty()) &&
+                (dfautoextend_text==null||dfautoextend_text.isEmpty())&&(dfmaxsize_text==null||dfmaxsize_text.isEmpty()))
+            return false;
+        else return true;
+    }
+
     private  FileChooser fileChooser = new FileChooser();
     private File openedFile;
     private boolean isFileOpen = false;
+
+
 
     public static ObservableList<String> getList(){
         ObservableList<String> list= FXCollections.observableArrayList();
@@ -56,7 +82,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        combobox.setItems(l);
+
 
         //Tabla
         Inicialize_Table();
@@ -174,16 +200,27 @@ public class Controller implements Initializable {
     }
 
     SQL_File sql;
+
+
     @FXML
     private void handleSaveSQL(){
 
         sql= new SQL_File();
-        sql.generarFormato(combobox.getValue(),DF_Text.getText(),DFSize_Text.getText(),DFAutoExtend_Text.getText(),
-                DFMAXSIZE_Text.getText());
 
-
-
+        //sql.generarFormato();
         FileChooser fileChooser = new FileChooser();
+        boolean system=false,sysaux=false,temp=false,undo=false;
+
+        system=validateQuerys(DF_Text.getText(),DFSize_Text.getText(),DFAutoExtend_Text.getText(),DFMAXSIZE_Text.getText());
+        sysaux=validateQuerys(DF_Text1.getText(),DFSize_Text1.getText(),DFAutoExtend_Text1.getText(),DFMAXSIZE_Text1.getText());
+        temp=validateQuerys(DF_Text2.getText(),DFSize_Text2.getText(),DFAutoExtend_Text2.getText(),DFMAXSIZE_Text2.getText());
+        undo=validateQuerys(DF_Text3.getText(),DFSize_Text3.getText(),DFAutoExtend_Text3.getText(),DFMAXSIZE_Text3.getText());
+        sql.generarFormato(system,DF_Text.getText(),DFSize_Text.getText(),DFAutoExtend_Text.getText(),DFMAXSIZE_Text.getText(),
+            sysaux,DF_Text1.getText(),DFSize_Text1.getText(),DFAutoExtend_Text1.getText(),DFMAXSIZE_Text1.getText(),
+            temp,DF_Text2.getText(),DFSize_Text2.getText(),DFAutoExtend_Text2.getText(),DFMAXSIZE_Text2.getText(),
+            undo,DF_Text.getText(),DFSize_Text.getText(),DFAutoExtend_Text.getText(),DFMAXSIZE_Text.getText()
+        );
+
         // Pone Extención
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "SQL files (*.sql)", "*.sql");
